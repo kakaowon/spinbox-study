@@ -13,8 +13,9 @@ function Spinbox($context) {
  1. 증가버튼을 클릭하면 인풋박스의 값이 +1된다.
  2. 감소버튼을 클릭하면 인풋박스의 값이 -1된다.
  3. 인풋박스의 값 최대값 : 100
- 4. 인풋박스의 값 최소값 : 0
+ 4. 인풋박스의 값 최소값 : 0onBlurInput
  5. 사용자가 키 입력 방어 처리
+ 6. 숫자만 입력이 가능하다.
  */
 Spinbox.prototype = {
     attachEvents: function($context) {
@@ -23,16 +24,22 @@ Spinbox.prototype = {
         $context.on('blur', '.__value', this.onBlurInput.bind(this)); // this = spinbox
     },
 
-    onBlurInput : function(e){
+    onBlurInput : function(e) {
         var inputValue = $(e.target).val();
 
         if (this.isMoreThanMaxValue(inputValue) || this.isLessThanMinValue(inputValue)) {
             alert("입력은 " + this.MIN_VALUE + "~" + this.MAX_VALUE + "사이의 숫자만 입력가능합니다.");
             this.updateValue(this.value);
-
-        } else {
+        } else if (this.isNumber(inputValue)) {
             this.updateValue(inputValue);
+        } else {
+            alert("숫자만 입력할 수 있습니다.");
+            this.updateValue(this.value);
         }
+    },
+
+    isNumber: function(inputValue) {
+        return isNaN(inputValue) === false;
     },
 
     onClickButtons: function(e) {
@@ -73,3 +80,4 @@ Spinbox.prototype = {
         this.$input.val(this.value);
     }
 };
+
