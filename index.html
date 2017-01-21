@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./bower_components/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+<div id="spinbox">
+    <input class="__value" type="text" value="0" />
+    <button class="__increment">▲</button>
+    <button class="__decrement">▼</button>
+</div>
+
+<script src="./src/spinbox.js"></script>
+<script>
+    $(document).ready(function(){
+        var spinbox = new Spinbox($('#spinbox'));
+    });
+</script>
+
+</body>
+</html>
